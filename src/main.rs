@@ -6,11 +6,6 @@ use core::{
     ptr::{read_volatile, write_volatile},
 };
 
-mod boot {
-    use core::arch::global_asm;
-
-    global_asm!(".section .start._start");
-}
 const GPFSEL2: *mut u32 = 0x3F20_0008 as *mut u32;
 const GPSET0: *mut u32 = 0x3F20_001C as *mut u32;
 const GPCLR0: *mut u32 = 0x3F20_0028 as *mut u32;
@@ -19,7 +14,7 @@ const CLO: *mut u32 = 0x3F00_3004 as *mut u32;
 const CHI: *mut u32 = 0x3F00_3008 as *mut u32;
 
 #[no_mangle]
-pub extern "C" fn _start() -> ! {
+fn _start() -> ! {
     unsafe {
         write_volatile(GPFSEL2, 1 << 18);
     }

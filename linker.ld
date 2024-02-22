@@ -3,8 +3,13 @@ ENTRY(_start)
 SECTIONS
 {
     . = 0x200000;
-    .start :
+    .text :
     {
-        *(.start._start)
+        *(.text)
+    }
+
+    /DISCARD/ :
+    {
+        *(.comment)
     }
 }
