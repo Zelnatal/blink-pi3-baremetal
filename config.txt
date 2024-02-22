@@ -1,2 +1,3 @@
 arm_64bit=1
 kernel=kernel.img
+total_mem=1024
