@@ -15,18 +15,29 @@ const CHI: *mut u32 = 0x3F00_3008 as *mut u32;
 
 #[no_mangle]
 fn _start() -> ! {
+    setup();
+    let mut state = false;
+    loop {
+        set(state);
+        state = !state;
+        delay(1000);
+    }
+}
+
+fn setup() {
     unsafe {
         write_volatile(GPFSEL2, 1 << 18);
     }
-    loop {
-        unsafe {
+}
+
+fn set(state: bool) {
+    match state {
+        true => unsafe {
             write_volatile(GPSET0, 1 << 26);
-        }
-        delay(1000);
-        unsafe {
+        },
+        false => unsafe {
             write_volatile(GPCLR0, 1 << 26);
-        }
-        delay(1000);
+        },
     }
 }
 
