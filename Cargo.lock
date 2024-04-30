@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "blink-raspi-pi3-baremetal"
+name = "blink-pi3-baremetal"
 version = "0.1.0"
